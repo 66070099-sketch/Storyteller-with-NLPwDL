@@ -103,16 +103,17 @@
             <div class="description">${descText}</div>
             <div class="button">
             <button onclick="openStory(${index})">ไปที่เรื่องที่ ${index}</button>
-            </button>
             </div>
         </div>
         </div>
     `;
-    }
+}
+
     function openStory(index) {
-    // เปลี่ยน URL ของหน้าเว็บตามตัวอย่างนี้
-    window.location.href = `./Tales40_web/Story_${index}/Tales.html`; // แก้ไข URL ตามโครงสร้างไฟล์
-  }
+        // Redirect to the corresponding HTML file for each story
+        window.location.href = `story${index}.html`; // Make sure the HTML files follow this naming convention
+    }
+
     function createCarouselItem(index) {
       return `
         <a class="carousel-item" data-index="${index}">
