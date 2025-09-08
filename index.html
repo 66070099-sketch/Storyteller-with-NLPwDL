@@ -96,19 +96,23 @@
     function createSlideItem(index, typeText, descText) {
     return `
         <div class="item" data-index="${index}">
-            <img src="./static/images/Story_${index}/1.png" alt="Story ${index}">
-            <div class="content">
-                <div class="title">นิทาน</div>
-                <div class="type">${typeText}</div>
-                <div class="description">${descText}</div>
-                <div class="button">
-                    <a href="/backend/Tales40_web/story${index}/Tales.html">
-                        <button>ไปที่เรื่องที่ ${index}</button>
-                    </a>
-                </div>
+        <img src="./static/images/Story_${index}/1.png" alt="Story ${index}">
+        <div class="content">
+            <div class="title">นิทาน</div>
+            <div class="type">${typeText}</div>
+            <div class="description">${descText}</div>
+            <div class="button">
+            <button onclick="openStory(${index})">ไปที่เรื่องที่ ${index}</button>
+            </button>
             </div>
         </div>
+        </div>
     `;
+    }
+
+    function openStory(index) {
+    // เปลี่ยน URL ของหน้าเว็บตามตัวอย่างนี้
+    window.location.href = `./backend/Tales40_web/story${index}/Tales.html`; // แก้ไข URL ตามโครงสร้างไฟล์
     }
 
     function createCarouselItem(index) {
