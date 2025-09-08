@@ -96,22 +96,19 @@
     function createSlideItem(index, typeText, descText) {
     return `
         <div class="item" data-index="${index}">
-        <img src="./static/images/Story_${index}/1.png" alt="Story ${index}">
-        <div class="content">
-            <div class="title">นิทาน</div>
-            <div class="type">${typeText}</div>
-            <div class="description">${descText}</div>
-            <div class="button">
-            <button onclick="openStory(${index})">ไปที่เรื่องที่ ${index}</button>
+            <img src="./static/images/Story_${index}/1.png" alt="Story ${index}">
+            <div class="content">
+                <div class="title">นิทาน</div>
+                <div class="type">${typeText}</div>
+                <div class="description">${descText}</div>
+                <div class="button">
+                    <a href="/Tales40_web/story${index}/Tales.html">
+                        <button>ไปที่เรื่องที่ ${index}</button>
+                    </a>
+                </div>
             </div>
         </div>
-        </div>
     `;
-}
-
-    function openStory(index) {
-        // Redirect to the corresponding HTML file for each story
-        window.location.href = `story${index}.html`; // Make sure the HTML files follow this naming convention
     }
 
     function createCarouselItem(index) {
