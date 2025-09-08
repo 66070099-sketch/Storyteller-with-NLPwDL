@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>เรียงลำดับเหตุการณ์ — ลากรูปให้ตรงข้อความ</title>
+
+  <link rel="stylesheet" href="../styles_story.css" />
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+
+  <!-- 🔹 เมนูด้านบน -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="http://127.0.0.1:8000/"  class="nav-link" aria-current="page">Home</a>
+    </div>
+  </nav>
+
+  <main>
+    <!-- แถวบน: รูปให้ลาก (JS จะสุ่มแล้วเติมเข้ามา) -->
+    <section class="draggable-elements" aria-label="รูปให้ลาก"></section>
+
+    <!-- แถวล่าง: ข้อความลำดับเหตุการณ์ (เป้าหมายให้วาง) -->
+    <section class="droppable-elements" aria-label="ลำดับเหตุการณ์">
+      <div class="droppable" data-draggable-id="read-letter"><span>1</span></div>
+      <div class="droppable" data-draggable-id="catch-train"><span>2</span></div>
+      <div class="droppable" data-draggable-id="visit-relative"><span>3</span></div>
+      <div class="droppable" data-draggable-id="eat-outdoor"><span>4</span></div>
+      <div class="droppable" data-draggable-id="eat-happy"><span>5</span></div>
+      <div class="droppable" data-draggable-id="escape-cat"><span>6</span></div>
+    </section>
+
+    <div class="bottom-actions">
+      <button id="shuffle-btn">🔀 สุ่มใหม่</button>
+    </div>
+  </main>
+
+  <!-- 🔹 ปุ่มลอย & แผงมุมขวาล่าง (Demo Data) -->
+  <button id="corner-toggle" class="corner-toggle" aria-expanded="false" aria-controls="corner-panel" title="แสดงเนื้อหานิทาน">
+    <i class="fa-solid fa-file-lines"></i>
+  </button>
+
+  <aside id="corner-panel" class="corner-panel" aria-live="polite" aria-hidden="true">
+    <div class="corner-header">
+      <span><i class="fa-solid fa-database"></i> Story</span>
+      <button id="corner-close" class="corner-close" title="ปิด"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <pre id="corner-content">กดปุ่มขวาล่างเพื่อโหลดข้อมูล…</pre>
+  </aside>
+
+  <!-- 🔹 ปุ่มลอย & แผงมุมซ้ายล่าง (Guide จาก JSON) -->
+  <button id="guide-toggle" class="guide-toggle" aria-expanded="false" aria-controls="guide-panel" title="แสดงคำแนะนำ">
+    <i class="fa-solid fa-question-circle"></i>
+  </button>
+
+  <aside id="guide-panel" class="guide-panel" aria-live="polite" aria-hidden="true">
+    <div class="guide-header">
+      <span><i class="fa-solid fa-circle-info"></i> Guide</span>
+      <button id="guide-close" class="guide-close" title="ปิด"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <pre id="guide-content">กำลังโหลดคำแนะนำ…</pre>
+  </aside>
+
+  <script src="game.js" defer></script>
+</body>
+</html>

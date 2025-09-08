@@ -1,0 +1,290 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,600');
+
+html, body{
+  height: 100%;
+  overflow: hidden;             /* ปิด scroll wheel ขึ้น-ลง ของทั้งหน้า */
+  overscroll-behavior: none;    /* กัน bounce บนมือถือ */
+}
+
+/* ฟอนต์และสีพื้นฐาน */
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Montserrat',sans-serif;background:#eee;color:#111}
+
+:root{
+  --accent:#ffffff;           /* สีปุ่ม Home */
+  --accent-contrast:rgb(126, 80, 4);
+
+  /* สี/เงาแผงมุมขวาล่าง (ถ้ามีใช้งาน) */
+  --corner-bg:#ffffff;
+  --corner-border:#dadada;
+  --corner-shadow:0 12px 28px rgba(0,0,0,.18);
+    --nav-h: 56px;            /* ถ้า nav สูงกว่านี้ เปลี่ยนค่าตรงนี้ */
+}
+
+/* 🔹 Navbar */
+.navbar{
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 60px;   /* เดิม ~56px → สูงขึ้น */
+  z-index: 20;
+  backdrop-filter: blur(6px);
+  background: rgba(184, 116, 7, 0.495);
+}
+.nav-inner{
+  max-width:1200px;
+  margin:0 auto;
+  padding:0 16px;
+  display:flex;
+  gap:22px;
+  height: 100%;
+  width: 100%;
+  align-items:center;
+}
+.nav-link{
+  color:#e8e8e8;
+  text-decoration:none;
+  font-weight:600;
+  padding:14px 20px;
+  border-radius:12px;
+  transition:.2s;
+}
+.nav-link:hover{
+  background:rgba(0,0,0,.08);
+  color:#fff;
+}
+.nav-link.active{
+  background:var(--accent);
+  color:var(--accent-contrast);
+  box-shadow:0 6px 16px rgba(56, 32, 1, 0.28);
+}
+
+/* ===== Slider ===== */
+.slider{
+  height: 100vh;
+  margin-top: -0px;   /* ไม่มี header แบบเก่าแล้ว */
+  width: 100vw;
+  overflow: hidden;
+  position: relative;
+}
+.slider .list .item {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity .5s ease;
+  pointer-events: none;
+}
+.slider .list .item.active {
+  opacity: 1;
+  z-index: 1;
+  
+}
+.slider .list .item img { display:block; width:100%; height:100%; object-fit:cover; z-index: 10; }
+.slider .list .item .content{
+  position: absolute;
+  top: 20%;
+  width: 1140px;
+  max-width: 80%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding-right: 30%;
+  box-sizing: border-box;
+  color: #fff;
+  text-shadow: 0 5px 10px #0004;
+  z-index: 200;
+}
+.slider .list .item .content .title,
+.slider .list .item .content .type{
+  font-size: 5em;
+  font-weight: bold;
+  line-height: 1.3em;
+}
+.slider .list .item .type{
+  color: #a85400bd;
+  -webkit-text-stroke: 5px #deb9957b;  
+  paint-order: stroke fill;
+  white-space: nowrap;
+  font-size: 4vw;        /* เล็กลงจากเดิมนิดนึง จะได้ยาวแทนที่จะสูง */
+  letter-spacing: 2px;   /* เพิ่มช่องไฟเล็กน้อยให้อ่านง่าย */
+  line-height: 1.2;
+  text-shadow: 
+    -1px -1px 0 #deb9957b,
+     1px -1px 0 #deb9957b,
+    -1px  1px 0 #deb9957b,
+     1px  1px 0 #deb9957b;
+}
+.button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+.slider .list .item .button{
+  display: flex !important;
+  grid-template-columns: repeat(2, 130px);
+  grid-template-rows: 40px;
+  gap: 5px;
+  margin-top: 20px;
+  position: relative; 
+  z-index: 250;
+  pointer-events: auto;
+}
+.slider .list .item .button button{
+  font-size: 22px;              /* ใหญ่ขึ้น */
+  line-height: 1.1;
+  padding: 16px 40px;           /* หนาขึ้น ยาวขึ้น */
+  min-width: 220px;             /* ฮิตแอเรียกว้างขึ้น */
+  border-radius: 9999px;        /* pill shape */
+  border: none;
+  background: #fff;
+  color: #111;
+  font-weight: 700;
+  letter-spacing: .5px;
+  cursor: pointer;
+  box-shadow: 0 8px 22px rgba(0,0,0,.25);
+  transition: transform .12s ease, box-shadow .2s ease, letter-spacing .15s ease;
+}
+.slider .list .item .button button:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 10px 28px rgba(0,0,0,.28);
+  letter-spacing: .8px;
+}
+.slider .list .item .button button:nth-child(2){
+  background: transparent;
+  border: 2px solid #fff;
+  color: #fff;
+}
+
+/* ===== ปุ่มลูกศร: ล่างสุด ===== */
+.nextPrevArrows {
+  position: fixed;   
+  bottom: 1px;       /* Position close to the bottom */
+  left: 0;
+  width: 100%;       
+  display: flex;
+  justify-content: center;
+  gap: 10px;         
+  padding: 10px 0;
+  z-index: 150;
+}
+
+.nextPrevArrows button {
+  width: 28px; /* Reduce button size */
+  height: 28px; /* Reduce button size */
+  font-size: 16px; /* Adjust text size */
+  background-color: #96612486;
+  border-radius: 50%;
+  border: none;
+  color: #fff;
+  font-family: monospace;
+  font-weight: bold;
+  transition: .2s;
+  cursor: pointer;
+}
+
+/* Adjust hover effect */
+.nextPrevArrows button:hover {
+  background-color: #fff;
+  color: #000;
+}
+
+/* ===== Animation/สถานะสไลด์ปัจจุบัน ===== */
+.slider .list .item:nth-child(1){
+  opacity: 1; z-index: 1; position: absolute; inset: 0;
+}
+
+/* เอฟเฟกต์ตัวหนังสือเข้า */
+.slider .list .item:nth-child(1) .content .title,
+.slider .list .item:nth-child(1) .content .type,
+.slider .list .item:nth-child(1) .content .description,
+.slider .list .item:nth-child(1) .content .buttons{
+  transform: translateY(50px); filter: blur(20px); opacity: 0;
+  animation: showContent .5s 1s linear 1 forwards;
+}
+@keyframes showContent{ to{ transform: translateY(0); filter: blur(0); opacity: 1; } }
+.slider .list .item:nth-child(1) .content .title{ animation-delay: .4s !important; }
+.slider .list .item:nth-child(1) .content .type{ animation-delay: .6s !important; }
+.slider .list .item:nth-child(1) .content .description{ animation-delay: .8s !important; }
+.slider .list .item:nth-child(1) .content .buttons{ animation-delay: 1s !important; }
+
+/* เอฟเฟกต์ตอน next/prev (ปุ่ม) */
+.slider.next .thumbnail{ animation: effectNext .5s linear 1 forwards; }
+@keyframes effectNext{ from{ transform: translateX(150px); } }
+.slider.next .nextPrevArrows button,
+.slider.prev .nextPrevArrows button{ pointer-events: none; }
+
+@media screen and (max-width: 678px){
+  .slider .list .item .content{ padding-right: 0; }
+  .slider .list .item .content .title{ font-size: 50px; }
+}
+
+/* ==== Carousel: กว้างสุดขอบ, โชว์ ≥11 อัน ==== */
+#story-carousel {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -70px;  /* Move it closer to the bottom */
+  width: 80vw;  /* Reduce width */
+  min-height: 150px;  /* Reduce height */
+  max-width: 80vw;  /* Max width adjustment */
+  padding: 0 8px;
+  z-index: 120;
+  touch-action: pan-x;
+  cursor: grab;
+  will-change: transform;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+#story-carousel .carousel-item {
+  width: 120px !important;     /* Reduce width of each item */
+  height: 160px !important;    /* Adjust height */
+  pointer-events: auto; 
+}
+
+/* ลด "ความกว้าง" ของรูป แต่ "เพิ่มความสูง" เพื่อสัดส่วนสูง-แคบ */
+#story-carousel .carousel-item img {
+  width: 120px;              /* Make images smaller */
+  height: 140px !important;  /* Adjust height */
+  object-fit: cover;
+  border-radius: 20px;
+  box-shadow: 0 10px 22px rgba(0,0,0,.35);
+  transition: transform .25s ease, box-shadow .25s ease;
+  border: 2px solid transparent;
+  will-change: transform, box-shadow;
+}
+
+/* Hover/Active ให้เด่นขึ้น */
+#story-carousel .carousel-item img:hover {
+  transform: scale(0.9);
+  box-shadow: 0 14px 28px rgba(0,0,0,.45);
+}
+#story-carousel .carousel-item.active img {
+  border-color: #fff;
+  transform: scale(1.2);
+  box-shadow: 0 16px 32px rgba(0,0,0,.55);
+}
+
+/* บังคับมือถือ/แท็บเล็ตให้ใช้ขนาดเดียวกัน (ลบกฎเดิม 140x90) */
+@media (max-width: 1024px) {
+  #story-carousel .carousel-item { width: 148px !important; height: 148px !important; }
+  #story-carousel .carousel-item img { width: 140px !important; height: 140px !important; }
+}
+@media (max-width: 768px) {
+  #story-carousel { bottom: 92px; }
+  #story-carousel .carousel-item { width: 148px !important; height: 148px !important; }
+  #story-carousel .carousel-item img { width: 140px !important; height: 140px !important; }
+}
+
+#story-carousel:active {
+  cursor: grabbing;
+}
+
+/* สำหรับมือถือ ให้เล็กลง */
+@media (max-width: 768px) {
+  #story-carousel .carousel-item img {
+    width: 140px;
+    height: 90px;
+  }
+}
+
