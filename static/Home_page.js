@@ -27,11 +27,11 @@ function commitSelection(idx) {
   __currentIndex = idx;
 }
 
-function openStory(index) {
-  const base = window.location.origin;  // ใช้ base URL ปัจจุบันของเว็บไซต์
-  const url = `${base}/Tales40_web/story${index}/Tales.html`;  // เพิ่ม path ที่ต้องการไป
-  window.location.assign(url);
-}
+// function openStory(index) {
+//   const base = window.location.origin;  // ใช้ base URL ปัจจุบันของเว็บไซต์
+//   const url = `${base}/Tales40_web/story${index}/Tales.html`;  // เพิ่ม path ที่ต้องการไป
+//   window.location.assign(url);
+// }
 
 function centerCarouselTo(idx) {
   const inst = window.__materializeCarousel__;
