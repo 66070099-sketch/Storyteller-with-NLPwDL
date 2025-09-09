@@ -151,7 +151,7 @@ document.addEventListener("DOMContentLoaded", () => {
     { id: "pic_5",    file: "5.png"},
     { id: "pic_6",    file: "6.png"}
   ];
-  const IMG_BASES = [ "/static/images/Story_1/", "./static/images/Story_1/", "../static/images/Story_1/", "static/images/Story_1/" ];
+  const IMG_BASES = [ "../../../static/images/Story_1/" ];
 
   const draggableContainer = document.querySelector(".draggable-elements");
   const droppableElements  = document.querySelectorAll(".droppable");
